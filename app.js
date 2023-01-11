@@ -1,33 +1,68 @@
 /* Imports */
 
 /* Get DOM Elements */
-const selectEl = document.getElementById('my-select');
-const inputEl = document.getElementById('my-input');
-const buttonEl = document.getElementById('my-button');
-const animalEl = document.getElementById('animal');
-/* State */
 
-let animal = '';
-/* Events */
-selectEl.addEventListener('change', () => {
-    // if (selectEl.value === 'dog-value') {
-    //     alert('woof woof!');
-    // } else {
-    //     alert('no dogs here'); 
-    // }
+const parkDropdown = document.getElementById('park-dropdown');
+const parkImage = document.getElementById('park-image');
+const parkCountEl = document.getElementById('park-count');
+const skylineDropdown = document.getElementById('skyline-dropdown');
+const skylineImage = document.getElementById('skyline-image');
+const skylineCountEl = document.getElementById('skyline-count');
+const sloganButton = document.getElementById('slogan-button');
+const sloganInputEl = document.getElementById('slogan-input');
+const slogansEl = document.getElementById('slogans');
+// State 
+let parkCount = 0;
+let skylineCount = 0;
+let slogans = ['the big apple', 'the windy city', 'the great milwuakee'];
 
-    animal = selectEl.value;
+displaySlogans();
 
-    animalEl.textContent = `This user loves the ${animal}`;
+// Events
+sloganButton.addEventListener('click', () => {
+    slogans.push(sloganInputEl.value);
+
+    displaySlogans();
+});
+
+parkDropdown.addEventListener('change', () => {
+    parkImage.src = `assets/park-${parkDropdown.value}.png`;
+    parkCount++;
+
+    displayStats();
 });
 
 
-buttonEl.addEventListener('click', () => {
-    console.log(inputEl.value);
-    alert(inputEl.value);
-    sendItToADatabase(inputEl.value);
+skylineDropdown.addEventListener('change', () => {
+    skylineImage.src = `assets/skyline-${skylineDropdown.value}.png`;
+    skylineCount++;
+
+    displayStats();
 });
 
 /* Display Functions */
 
+function displayStats() {
+    skylineCountEl.textContent = skylineCount;
+    parkCountEl.textContent = parkCount;
+}
 // (don't forget to call any display functions you want to run on page load!)
+
+function displaySlogans() {
+        // i want to go through the slogans array
+    // one by one i want to create an element for that slogan and add it to the DOM
+    // when i do the same thing to every item in an array, it's time for a a loop!
+    // 99% of the time, if you see an array, it's because it's time to loop.
+    slogansEl.textContent = '';
+
+    for (let slogan of slogans) {
+    // - there is a function called `createElement('p')` that will create a <p> for us
+        const newElement = document.createElement('p');
+        newElement.classList.add('slogan');
+        newElement.textContent = slogan;
+    // - the is another function called `myParentEl.append(myChildEl)` that will inject `myChildEl` into `myParentEl`.
+        slogansEl.append(newElement);
+    //     - that is how we put new elements into the DOM so the user can see them
+    }
+
+}

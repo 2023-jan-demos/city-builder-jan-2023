@@ -31,21 +31,37 @@
     </header>
 
     <main>
-        <select id="my-select">
-            <option value="">Please select an option</option>
-            <option value="dog-value">🐕</option>
-            <option value="cat-value">🐱</option>
-            <option value="pigeon-value">🐦</option>
-        </select>
+        <section class="images">
+            <img id="park-image"/>
+            <img id="skyline-image"/>
+        </section>
+        <section id="slogans">
 
-        <div id="animal">
-
-        </div>
-
-        <div>
-            Type here: <input id="my-input"/>
-            <button id="my-button">Submit words</button>
-        </div>
+        </section>
+        <section class="dropdowns">
+            <select id="park-dropdown">
+                <option value="">Select a park</option>
+                <option value="bridge">Bridge</option>
+                <option value="shrub">Shrubbery</option>
+                <option value="slide">Slides</option>
+            </select>
+            <div>
+                You changed parks <span id="park-count">0</span> times
+            </div>
+            <select id="skyline-dropdown">
+                <option value="">Select a skyline</option>
+                <option value="sunset">Sunset</option>
+                <option value="sydney">Sydney</option>
+                <option value="trees">Trees</option>
+            </select>
+            <div>
+                You changed skylines <span id="skyline-count">0</span> times
+            </div>
+        </section>
+        <section>
+            <input id="slogan-input" />
+            <button id="slogan-button">Add slogan</button>
+        </section>
     </main>
 
 </body>
