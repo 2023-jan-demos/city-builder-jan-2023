@@ -1,5 +1,5 @@
 /* Imports */
-
+import { makeImageURL, renderSlogan } from './utils.js';
 /* Get DOM Elements */
 
 const parkDropdown = document.getElementById('park-dropdown');
@@ -25,8 +25,10 @@ sloganButton.addEventListener('click', () => {
     displaySlogans();
 });
 
+
+
 parkDropdown.addEventListener('change', () => {
-    parkImage.src = `assets/park-${parkDropdown.value}.png`;
+    parkImage.src = makeImageURL('park', parkDropdown.value);
     parkCount++;
 
     displayStats();
@@ -34,7 +36,7 @@ parkDropdown.addEventListener('change', () => {
 
 
 skylineDropdown.addEventListener('change', () => {
-    skylineImage.src = `assets/skyline-${skylineDropdown.value}.png`;
+    skylineImage.src = makeImageURL('skyline', skylineDropdown.value);
     skylineCount++;
 
     displayStats();
@@ -42,27 +44,31 @@ skylineDropdown.addEventListener('change', () => {
 
 /* Display Functions */
 
+// no arguments -- this is impure
 function displayStats() {
+    // mutate the DOM -- that's a side effect. this is impure
     skylineCountEl.textContent = skylineCount;
     parkCountEl.textContent = parkCount;
 }
 // (don't forget to call any display functions you want to run on page load!)
 
+// no arguments: impure
+// as a rule display function are impure: they append to the DOM
 function displaySlogans() {
         // i want to go through the slogans array
     // one by one i want to create an element for that slogan and add it to the DOM
     // when i do the same thing to every item in an array, it's time for a a loop!
     // 99% of the time, if you see an array, it's because it's time to loop.
+
+    // mutate an element _not defined in the function_: impure
     slogansEl.textContent = '';
 
     for (let slogan of slogans) {
-    // - there is a function called `createElement('p')` that will create a <p> for us
-        const newElement = document.createElement('p');
-        newElement.classList.add('slogan');
-        newElement.textContent = slogan;
+        const newElement = renderSlogan(slogan);
     // - the is another function called `myParentEl.append(myChildEl)` that will inject `myChildEl` into `myParentEl`.
         slogansEl.append(newElement);
     //     - that is how we put new elements into the DOM so the user can see them
     }
 
 }
+
